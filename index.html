@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Қазақстан Тарихы</title>
+<style>
+/* ========== НЕГІЗГІ CSS ========== */
+:root{
+  --gold:#FFD700;
+  --green:#00A651;
+  --blue:#0072CE;
+  --dark:#0f172a;
+  --card:#1e293b;
+  --light:#f8fafc;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;scroll-behavior:smooth}
+body{background:var(--dark);color:#fff;line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* ========== HEADER ========== */
+header{
+  background:linear-gradient(120deg,#00A651,#0072CE,#00A651,#FFD700);
+  background-size:300% 300%;
+  animation:gradientMove 10s ease infinite;
+  padding:80px 20px 60px;text-align:center;position:relative;overflow:hidden
+}
+@keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+header::after{content:"🇰🇿";position:absolute;font-size:180px;opacity:.08;right:-20px;bottom:-40px;transform:rotate(-15deg)}
+header h1{font-size:48px;text-shadow:0 4px 20px rgba(0,0,0,.4);animation:fadeDown .8s ease}
+header p{font-size:19px;opacity:.95;max-width:750px;margin:15px auto 25px}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.btn-main{
+  background:var(--gold);color:#111;border:none;padding:14px 28px;border-radius:50px;
+  font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 10px 25px rgba(255,215,0,.4);
+  transition:.3s
+}
+.btn-main:hover{transform:scale(1.05) translateY(-2px);box-shadow:0 15px 30px rgba(255,215,0,.6)}
+.search{
+  width:100%;max-width:600px;padding:15px 20px;border-radius:50px;border:2px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.15);color:#fff;font-size:16px;margin-top:25px;outline:none;backdrop-filter:blur(10px)
+}
+.search::placeholder{color:rgba(255,255,255,.7)}
+.search:focus{border-color:var(--gold);background:rgba(255,255,255,.25)}
+
+/* ========== NAV ========== */
+nav{
+  background:#1e293b;padding:0;text-align:center;position:sticky;top:0;z-index:100;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);overflow-x:auto;white-space:nowrap;display:flex;justify-content:center
+}
+nav a{padding:16px 18px;display:inline-block;font-weight:700;font-size:15px;position:relative;transition:.2s}
+nav a:hover{color:var(--gold)}
+nav a::after{content:"";position:absolute;left:50%;bottom:0;width:0;height:3px;background:var(--gold);transition:.3s;transform:translateX(-50%)}
+nav a:hover::after{width:80%}
+
+/* ========== CONTAINER ========== */
+.container{max-width:1050px;margin:auto;padding:30px 20px}
+h2{
+  color:var(--gold);margin:55px 0 22px;font-size:30px;border-left:6px solid var(--green);
+  padding-left:14px;display:flex;align-items:center;gap:10px
+}
+h3{color:#38bdf8;margin:25px 0 12px;font-size:22px}
+
+/* ========== CARD ========== */
+.card{
+  background:var(--card);border-radius:18px;padding:24px;margin-bottom:18px;
+  border:1px solid #334155;transition:.3s;animation:fadeUp .6s ease
+}
+.card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 15px 35px rgba(0,0,0,.4)}
+.card b{color:var(--gold)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ========== TIMELINE ========== */
+.timeline{border-left:4px solid var(--gold);padding-left:24px;margin-left:10px}
+.timeline div{
+  margin-bottom:26px;position:relative;background:#1e293b;padding:18px 20px;border-radius:14px;
+  border:1px solid #334155;transition:.3s
+}
+.timeline div:hover{border-color:#38bdf8;transform:translateX(6px)}
+.timeline div::before{
+  content:"";position:absolute;left:-33px;top:22px;width:14px;height:14px;
+  background:var(--gold);border-radius:50%;border:3px solid #0f172a;box-shadow:0 0 0 3px var(--gold)
+}
+.timeline b{color:var(--gold);font-size:18px;display:block;margin-bottom:6px}
+
+/* ========== GRID / PERSON / FACT ========== */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.person{
+  background:linear-gradient(135deg,#0ea5e9,#0072CE);border-radius:16px;padding:20px;
+  transition:.3s;cursor:pointer
+}
+.person:hover{transform:scale(1.03) rotate(-1deg);box-shadow:0 12px 25px rgba(14,165,233,.4)}
+.person h4{font-size:18px;margin-bottom:6px}
+.fact{
+  background:linear-gradient(135deg,#FFD700,#FFA500);color:#111;border-radius:16px;padding:20px;
+  font-weight:700;transition:.3s;box-shadow:0 8px 20px rgba(255,215,0,.2)
+}
+.fact:hover{transform:translateY(-5px) scale(1.02)}
+
+/* ========== QUIZ ========== */
+button{cursor:pointer}
+.quiz-opt{
+  display:block;width:100%;text-align:left;background:#334155;color:#fff;border:none;
+  padding:13px 18px;border-radius:12px;margin:8px 0;font-size:16px;transition:.2s
+}
+.quiz-opt:hover{background:#475569;transform:translateX(5px)}
+.quiz-opt:active{transform:scale(.98)}
+#r1,#r2,#r3{font-weight:800;margin-top:10px;font-size:17px}
+
+/* ========== DETAILS / ACCORDION ========== */
+details{background:var(--card);border-radius:14px;padding:18px;margin-bottom:12px;cursor:pointer;border:1px solid #334155;transition:.2s}
+details:hover{border-color:var(--gold)}
+details summary{font-weight:800;color:var(--gold);font-size:18px;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:" +";float:right}
+details[open] summary::after{content:" -"}
+
+/* ========== FOOTER ========== */
+footer{text-align:center;padding:45px 20px;opacity:.7;background:#020617;margin-top:50px}
+footer b{color:var(--gold)}
+
+/* ========== MOBILDI / ADAPTIVE ========== */
+@media(max-width:700px){
+  header h1{font-size:32px}
+  header p{font-size:16px}
+  h2{font-size:24px}
+  nav{justify-content:flex-start;padding-left:10px}
+  nav a{padding:14px 12px;font-size:14px}
+  .timeline{padding-left:18px}
+  .timeline div::before{left:-27px}
+}
+@media(max-width:400px){
+  header{padding:50px 15px 40px}
+  header h1{font-size:26px}
+  .btn-main{padding:12px 20px;font-size:15px}
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#0f172a}
+::-webkit-scrollbar-thumb{background:linear-gradient(#00A651,#0072CE);border-radius:10px}
+::selection{background:var(--gold);color:#111}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🇰🇿 ҚАЗАҚСТАН ТАРИХЫ</h1>
+<p>Тас дәуірінен Тәуелсіз Қазақстанға дейін — 1 000 000 жылдық толық тарих</p>
+<button class="btn-main" onclick="document.getElementById('dauir').scrollIntoView({behavior:'smooth'})">Саяхатты бастау →</button><br>
+<input class="search" id="search" placeholder="🔍 Іздеу... мысалы: Абылай, Алтын адам, Байқоңыр" onkeyup="searchHistory()">
+</header>
+
+<nav>
+<a href="#dauir">Ежелгі дәуір</a>
+<a href="#saktar">Сақтар</a>
+<a href="#turik">Түріктер</a>
+<a href="#mongol">Моңғолдар</a>
+<a href="#khanate">Хандық</a>
+<a href="#resei">Ресей</a>
+<a href="#kenes">Кеңес</a>
+<a href="#tauelsiz">Тәуелсіздік</a>
+<a href="#mad">Мәдениет</a>
+<a href="#quiz">Тест</a>
+</nav>
+
+<div class="container" id="content">
+
+<h2 id="dauir">🪨 1. Ежелгі дәуір</h2>
+<div class="card"><b>1 млн жыл бұрын:</b> Қазақстан жерінде алғашқы адамдар пайда болды. Қаратау, Маңғыстау, Сарыарқадан тас құралдар табылған.</div>
+<div class="timeline">
+<div><b>Палеолит - Тас дәуір</b> Адамдар аң аулап, үңгірде тұрған.</div>
+<div><b>Неолит - Ботай мәдениеті</b> Жылқыны алғаш қолға үйреткен жер! 5500 жыл бұрын.</div>
+<div><b>Қола дәуірі - Андрон</b> Қоладан қару, арба ойлап табылды.</div>
+<div><b>Темір дәуірі</b> Темір қылыш, сауыт, көшпелі мал шаруашылығы гүлденді.</div>
+</div>
+
+<h2 id="saktar">🏹 2. Сақтар, Үйсіндер, Қаңлылар</h2>
+<div class="card">Сақтар - Қазақстанның алғашқы мемлекет құрған халқы. Геродот оларды «Азияның ең батыл жауынгерлері» деп жазған.</div>
+<div class="timeline">
+<div><b>б.з.д. VII - III ғ. - Сақтар</b> Патшайым Томирис Кирді жеңді. <b>«Алтын адам»</b> - Есік қорғанынан табылды, 4000+ алтын әшекей!</div>
+<div><b>Үйсіндер</b> Жетісуда өмір сүрді. Астанасы - Қызыл Аңғар.</div>
+<div><b>Қаңлылар</b> Сырдария бойында. Отырар, Тараз қалаларының негізі.</div>
+<div><b>Сарматтар</b> Әйелдер де жауынгер болған - «амазонкалар» аңызы осыдан.</div>
+</div>
+
+<h2>⚔️ 3. Ғұндар</h2>
+<div class="timeline">
+<div><b>б.з.д. 209 ж. - Мөде шаньюй</b> Ғұн империясын құрды.</div>
+<div><b>434-453 ж. - Аттила</b> «Құдайдың қамшысы». Еуропаны дүр сілкіндірді.</div>
+</div>
+
+<h2 id="turik">🐺 4. Түрік қағанаттары</h2>
+<div class="timeline">
+<div><b>552-603 - Түрік қағанаты</b> Бумын қаған. Аумағы Кореядан Қырымға дейін!</div>
+<div><b>704-756 - Түргеш</b> Сулу қаған арабтарға қарсы соғысты.</div>
+<div><b>840-1212 - Қарахандар</b> Алғашқы мұсылман түрік мемлекеті. «Құтты білік» жазылды.</div>
+<div><b>XI-XIII ғ. - Қыпшақтар</b> Дешті Қыпшақ. Қыпшақ тілі - қазақ тілінің негізі.</div>
+</div>
+<div class="card"><b>Жібек жолы:</b> Тараз, Отырар, Түркістан, Сауран - әлемдік сауда орталықтары.</div>
+
+<h2 id="mongol">🐴 5. Моңғолдар және Алтын Орда</h2>
+<div class="timeline">
+<div><b>1219-1221 - Отырар апаты</b> Отырар 6 ай қоршауда болды, кейін құлады.</div>
+<div><b>1227 - Жошы ұлысы</b> Қазақстан жері Жошыға берілді.</div>
+<div><b>1243-1502 - Алтын Орда</b> Астанасы - Сарай-Бату. Қазақ халқы осы кезде қалыптаса бастады.</div>
+</div>
+
+<h2 id="khanate">👑 6. Қазақ хандығы (1465-1847)</h2>
+<div class="card"><b>1465 ж.</b> Керей мен Жәнібек Жетісуда Қазақ хандығын құрды. 200 мың адам еріп келді. «Қазақ» - «еркін, азат адам».</div>
+<div class="grid">
+<div class="person"><h4>Керей мен Жәнібек</h4>Негізін қалаушылар, 1465 ж.</div>
+<div class="person"><h4>Қасым хан</h4>«Қасым ханның қасқа жолы» - алғашқы заңдар.</div>
+<div class="person"><h4>Тәуке хан</h4>«Жеті Жарғы». Төле, Қазыбек, Әйтеке билер.</div>
+<div class="person"><h4>Абылай хан</h4>Ұлы қолбасшы, дипломат. Жоңғарларды жеңді.</div>
+<div class="person"><h4>Кенесары хан</h4>Соңғы хан. Тәуелсіздік үшін күресті.</div>
+</div>
+<div class="timeline">
+<div><b>1723-1727 - Ақтабан шұбырынды</b> Жоңғар шапқыншылығы. Халықтың 1/3 қырылды.</div>
+<div><b>1729 - Аңырақай шайқасы</b> Қазақтар жоңғарларды талқандады.</div>
+<div><b>1731 - Кіші жүз Ресейге қосылды</b> Әбілқайыр хан ант берді.</div>
+</div>
+
+<h2 id="resei">🏛️ 7. Ресей кезеңі</h2>
+<div class="timeline">
+<div><b>1837-1847 - Кенесары көтерілісі</b> Ең ірі ұлт-азаттық көтеріліс. 10 жылға созылды.</div>
+<div><b>1836-1838 - Исатай мен Махамбет</b> Батыс Қазақстанда көтеріліс.</div>
+<div><b>1916 - Көтеріліс</b> Амангелді Иманов бастады.</div>
+</div>
+
+<h2 id="kenes">⭐ 8. Кеңес дәуірі</h2>
+<div class="timeline">
+<div><b>1917-1920 - Алаш Орда</b> Әлихан Бөкейханов. Қазақ автономиясы.</div>
+<div><b>1930-1933 - Ашаршылық</b> 2,3 млн адам аштан өлді - халықтың 49%.</div>
+<div><b>1937-1938 - Қуғын-сүргін</b> Алаш зиялылары атылды: Ахмет Байтұрсынұлы, Міржақып Дулатов...</div>
+<div><b>1941-1945 - Соғыс</b> 28 панфиловшы, Мәншүк Мәметова, Әлия Молдағұлова.</div>
+<div><b>1949 - Семей полигоны</b> 456 ядролық жарылыс. 1,5 млн адам зардап шекті.</div>
+<div><b>1961 - Байқоңыр</b> Юрий Гагарин - тұңғыш ғарышкер.</div>
+<div><b>1986 - Желтоқсан</b> Алматыда жастар көтерілісі.</div>
+</div>
+
+<h2 id="tauelsiz">🇰🇿 9. Тәуелсіз Қазақстан</h2>
+<div class="timeline">
+<div><b>16 желтоқсан 1991 - Тәуелсіздік</b> Нұрсұлтан Назарбаев - тұңғыш Президент.</div>
+<div><b>1993 - Теңге</b> 15 қарашада енгізілді.</div>
+<div><b>1997 - Астана</b> Жаңа астана - Ақмола.</div>
+<div><b>2017 - EXPO-2017</b> «Болашақ энергиясы». 4 млн адам келді.</div>
+<div><b>2022 - Жаңа Қазақстан</b> Реформалар, 7 жылдық президенттік мерзім.</div>
+</div>
+
+<h2 id="mad">🎭 Мәдениет</h2>
+<div class="grid">
+<div class="card"><b>🏕️ Киіз үй</b><br>1 сағатта жиналады. Шаңырақ - отбасы символы.</div>
+<div class="card"><b>🎵 Домбыра</b><br>Құрманғазы, Дина Нұрпейісова. 1 шілде - Домбыра күні.</div>
+<div class="card"><b>🌸 Наурыз - 22 наурыз</b><br>Наурыз көже - 7 түрлі тағамнан.</div>
+<div class="card"><b>🐎 Көкпар, Бәйге</b><br>2024 ж. Астанада Көшпенділер ойыны өтті.</div>
+<div class="card"><b>🥩 Бешбармақ</b><br>Ұлттық тағам. Қымыз, шұбат, бауырсақ.</div>
+<div class="card"><b>👶 Тұсаукесер</b><br>Баланың алғашқы қадамы.</div>
+</div>
+
+<h2>💡 Қызықты фактілер</h2>
+<div class="grid">
+<div class="fact">🐎 Жылқыны алғаш қолға үйреткен - Қазақстан (Ботай)</div>
+<div class="fact">🍎 Алманың отаны - Алматы. Апорт - ең үлкен алма</div>
+<div class="fact">🌍 9-орын әлемде - 2 724 900 км²</div>
+<div class="fact">🚀 Байқоңыр - ең үлкен ғарыш айлағы</div>
+</div>
+
+<details><summary>📚 Қосымша: Тұлғалар туралы оқу</summary>
+<p style="margin-top:10px"><b>Абай Құнанбаев</b> - ұлы ақын, ойшыл. <b>Шоқан Уәлиханов</b> - ғалым, саяхатшы. <b>Әл-Фараби</b> - Отырардан шыққан «екінші ұстаз». <b>Ыбырай Алтынсарин</b> - ағартушы.</p>
+</details>
+
+<h2 id="quiz">🧠 Тест</h2>
+<div class="card">
+<p><b>1. Қазақ хандығы қай жылы құрылды?</b></p>
+<button class="quiz-opt" onclick="check(this,true)">1465</button>
+<button class="quiz-opt" onclick="check(this,false)">1565</button>
+<button class="quiz-opt" onclick="check(this,false)">1723</button>
+<p id="r1"></p>
+<p style="margin-top:20px"><b>2. «Алтын адам» қай жерден табылды?</b></p>
+<button class="quiz-opt" onclick="check2(this,true)">Есік қорғанынан</button>
+<button class="quiz-opt" onclick="check2(this,false)">Отырардан</button>
+<button class="quiz-opt" onclick="check2(this,false)">Тараздан</button>
+<p id="r2"></p>
+<p style="margin-top:20px"><b>3. Тәуелсіздік күні қашан?</b></p>
+<button class="quiz-opt" onclick="check3(this,true)">16 желтоқсан 1991</button>
+<button class="quiz-opt" onclick="check3(this,false)">22 наурыз 1991</button>
+<button class="quiz-opt" onclick="check3(this,false)">1 мамыр 1992</button>
+<p id="r3"></p>
+</div>
+
+</div>
+<footer>Қазақстан тарихы • <b>CSS ішіне қосылған толық нұсқа</b> • 2026 🇰🇿</footer>
+<script>
+function searchHistory(){
+  let v=document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.card, .timeline div, .person, .fact').forEach(c=>{
+    c.style.display = c.textContent.toLowerCase().includes(v) ? '' : 'none';
+  });
+}
+function check(b,ok){ document.getElementById('r1').innerHTML = ok ? '✅ Дұрыс! 1465 - Жәнібек пен Керей' : '❌ Қате, тағы көр!'; }
+function check2(b,ok){ document.getElementById('r2').innerHTML = ok ? '✅ Дұрыс! Есік қорғаны' : '❌ Қате!'; }
+function check3(b,ok){ document.getElementById('r3').innerHTML = ok ? '✅ Дұрыс! Тәуелсіздік күні құтты болсын!' : '❌ Қате!'; }
+</script>
+</body>
+</html>
